@@ -1,0 +1,15 @@
+---
+interface Props {
+  size?: number;
+}
+const { size = 26 } = Astro.props;
+---
+
+<img
+  src="/logo-mark.png"
+  alt="Velidion"
+  height={size}
+  width={Math.round(size * (442 / 256))}
+  loading="eager"
+  decoding="async"
+/>

@@ -30,27 +30,30 @@ Nothing else is required — the copy and design are complete.
 ```
 website/
 ├─ src/
-│  ├─ pages/index.astro      ← the landing page (all copy + sections here)
-│  ├─ layouts/Layout.astro   ← <head>, meta/SEO/OpenGraph, fonts
-│  └─ styles/global.css      ← brand system (colors, type, components)
-├─ public/favicon.svg        ← the mark
-├─ astro.config.mjs          ← site URL
+│  ├─ pages/index.astro       ← the landing page (all copy + sections here)
+│  ├─ components/             ← Nav, Footer, Logo — shared across the page
+│  ├─ layouts/Layout.astro    ← <head>, meta/SEO/OpenGraph, fonts
+│  └─ styles/
+│     ├─ tokens.css           ← brand colors/type, vendored from design-system/tokens/
+│     └─ global.css           ← components built on those tokens
+├─ public/logo-mark.png       ← web-sized derivative of the brand mark (v0.1.2)
+├─ public/favicon.png, apple-touch-icon.png
+├─ astro.config.mjs           ← site URL
 └─ package.json
 ```
 
-The design palette intentionally matches the market-study charts in `company-hq` (steel blue `#2f6f8f`, ink `#1a2b3c`) so the brand is consistent across everything.
+Colors, type, and the logo come from the `design-system` repo — the source of truth for the brand lives there, not here. `src/styles/tokens.css` is a verbatim copy of `design-system/tokens/colors.css` and `tokens/typography.css`; if the brand system changes, update it there first, then copy the values over.
 
 ## Deploy — GitHub Pages (free; repo is public)
 
 > Pages from a private repo owned by an org needs a paid plan, so this repo is published public. That's fine for a marketing site — no secrets here, and `company-hq` stays private.
-
 
 This repo is already wired for GitHub Pages:
 
 - `.github/workflows/deploy.yml` builds the site with the official `withastro/action` and publishes it on every push to `main`.
 - `public/CNAME` pins the custom domain (`velidion.com`) so it survives every deploy.
 
-The one-time setup (GitHub settings + DNS at Namecheap) is documented step by step in `GO-LIVE.md`. Follow that once; after it's done, every `git push` to `main` redeploys the site automatically.
+GitHub Pages settings (source = GitHub Actions) and DNS at your registrar are one-time setup outside this repo — every `git push` to `main` redeploys automatically once that's done.
 
 ## Notes
 

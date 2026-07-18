@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 // ── EDIT THESE two placeholders once your accounts are live ───────────────
 const CALENDAR_URL = 'https://cal.com/velidion/intro'; // TODO: your booking link
@@ -11,26 +13,13 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
 ---
 
 <Layout>
-  <!-- ============================ NAV ============================ -->
-  <header class="nav">
-    <div class="wrap nav__row">
-      <a class="brand" href="/" aria-label="Velidion home">
-        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="7" fill="#1a2b3c"></rect>
-          <path d="M8 9.5 L15 22 L24 7" fill="none" stroke="#4a9fc4"
-                stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        Velidion
-      </a>
-      <a class="btn btn-ghost" href="#talk">Talk to us</a>
-    </div>
-  </header>
+  <Nav />
 
   <main>
     <!-- ============================ HERO ============================ -->
     <section class="hero">
       <div class="wrap">
-        <span class="eyebrow">Compliance infrastructure for safety-critical engineering</span>
+        <span class="chip eyebrow"><span class="dot" aria-hidden="true"></span>Compliance infrastructure for safety-critical engineering</span>
         <h1>Proving your engineering is safe shouldn&rsquo;t be the hardest part of building it.</h1>
         <p class="lead">
           Velidion is building the operating system for engineering compliance in
@@ -43,9 +32,10 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
           <a class="btn btn-ghost" href="#updates">Get updates</a>
         </div>
         <div class="hero__status">
-          <span class="dot" aria-hidden="true"></span>
-          Early days &mdash; we&rsquo;re in research, talking to engineering, quality, and
-          regulatory teams about how compliance really works.
+          <span class="chip">
+            <span class="dot" aria-hidden="true"></span>
+            Early days &mdash; in research, talking to engineering, quality, and regulatory teams
+          </span>
         </div>
       </div>
     </section>
@@ -54,7 +44,7 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
     <section>
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow">The problem</span>
+          <span class="chip eyebrow">The problem</span>
           <h2>Regulation isn&rsquo;t the hard part. Proving it is.</h2>
           <p class="lead">
             In medical devices, aerospace, automotive, and energy, the law doesn&rsquo;t
@@ -105,7 +95,7 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
     <section class="tint">
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow">What we believe</span>
+          <span class="chip eyebrow">What we believe</span>
           <h2>When software gets cheap, the workflow is the moat.</h2>
         </div>
         <div class="beliefs">
@@ -143,9 +133,9 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
     <!-- ========================= AUDIENCE ========================== -->
     <section class="audience">
       <div class="wrap">
-        <span class="eyebrow">Who we&rsquo;re building with</span>
+        <span class="chip eyebrow">Who we&rsquo;re building with</span>
         <h2>If your compliance lives in a spreadsheet you&rsquo;re afraid to break, we want to talk.</h2>
-        <p style="margin-top:20px;">
+        <p class="lead" style="margin-top:var(--space-5);">
           We&rsquo;re looking for small engineering, quality, and regulatory teams in
           regulated industries &mdash; medical devices first, but not only. Not to sell you
           anything: we&rsquo;re in the research phase, and the teams we talk to now are the
@@ -158,7 +148,7 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
     <section id="talk" class="tint">
       <div class="wrap">
         <div class="sec-head">
-          <span class="eyebrow">Two ways to be part of this</span>
+          <span class="chip eyebrow">Two ways to be part of this</span>
           <h2>Help shape it &mdash; or just follow along.</h2>
         </div>
         <div class="cta-grid">
@@ -211,27 +201,5 @@ const EMAIL_FORM_ACTION = ''; // TODO: e.g. https://formspree.io/f/xxxxxxx
     </section>
   </main>
 
-  <!-- ========================== FOOTER =========================== -->
-  <footer class="footer">
-    <div class="wrap footer__row">
-      <span class="brand" style="font-size:1rem;">
-        <svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="7" fill="#1a2b3c"></rect>
-          <path d="M8 9.5 L15 22 L24 7" fill="none" stroke="#4a9fc4"
-                stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        Velidion
-      </span>
-      <span>Compliance infrastructure for safety-critical industries.</span>
-      <span>&copy; {new Date().getFullYear()} Velidion &middot; <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span>
-    </div>
-    <div class="wrap">
-      <p class="notes">
-        Figures cited above:
-        <a href="https://qualysec.com/fda-510k-timeline/" target="_blank" rel="noopener">FDA 510(k) review timelines (Qualysec)</a>;
-        <a href="https://openregulatory.com/articles/greenlight-guru-price" target="_blank" rel="noopener">incumbent eQMS pricing (OpenRegulatory)</a>;
-        <a href="https://www.nature.com/articles/s41746-025-01800-1" target="_blank" rel="noopener">FDA AI/ML device authorization growth (npj Digital Medicine)</a>.
-      </p>
-    </div>
-  </footer>
+  <Footer contactEmail={CONTACT_EMAIL} />
 </Layout>
