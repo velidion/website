@@ -1,0 +1,18 @@
+# build output
+dist/
+# dependencies
+node_modules/
+# generated types
+.astro/
+# environment variables
+.env
+.env.production
+# macOS
+.DS_Store
+# logs
+npm-debug.log*
+# local preview snapshots (not part of the build — safe to delete)
+preview.html
+fragment.html
+/favicon.svg
+
