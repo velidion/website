@@ -1,6 +1,8 @@
 # Go live: velidion.com on GitHub Pages
 
-Follow these once, top to bottom. Everything here is free on your GitHub Pro plan (Pages works on private repos with Pro). After the one-time setup, every `git push` to `main` redeploys the site automatically.
+Follow these once, top to bottom. Everything here is free. After the one-time setup, every `git push` to `main` redeploys the site automatically.
+
+> **Repo visibility note.** GitHub Pages from a *private* repo owned by an **organization** requires a paid plan (Team/Enterprise) — personal Pro doesn't cover org repos. So this repo is published **public** (Step 3 below). That's standard for a marketing site: the deployed page is public anyway, and there are no secrets in this repo. Your private material (strategy, finance) lives in the separate `company-hq` repo, which stays private.
 
 Estimated time: ~20 minutes of work, then up to a few hours (occasionally up to 24h) of waiting for DNS to propagate.
 
@@ -38,9 +40,16 @@ If `git push` asks for credentials, use a GitHub personal access token as the pa
 
 ---
 
-## Step 3 — Turn on GitHub Pages (Source = GitHub Actions)
+## Step 3 — Make the repo public, then turn on GitHub Pages
 
-1. On GitHub, go to the **`velidion/website`** repo → **Settings** → **Pages** (left sidebar).
+**3a. Make the repo public** (required — see the visibility note at the top):
+
+1. Repo → **Settings** → scroll to the bottom → **Danger Zone**.
+2. **Change repository visibility** → **Change to public** → confirm by typing the repo name.
+
+**3b. Enable Pages:**
+
+1. Still in **Settings** → **Pages** (left sidebar).
 2. Under **Build and deployment → Source**, select **GitHub Actions**.
 
 That's it for this screen. Pushing in Step 2 already kicked off the deploy workflow; setting the source lets it publish.

@@ -40,7 +40,10 @@ website/
 
 The design palette intentionally matches the market-study charts in `company-hq` (steel blue `#2f6f8f`, ink `#1a2b3c`) so the brand is consistent across everything.
 
-## Deploy — GitHub Pages (free with your GitHub Pro plan)
+## Deploy — GitHub Pages (free; repo is public)
+
+> Pages from a private repo owned by an org needs a paid plan, so this repo is published public. That's fine for a marketing site — no secrets here, and `company-hq` stays private.
+
 
 This repo is already wired for GitHub Pages:
 
