@@ -134,6 +134,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .nav__row { display: flex; align-items: center; justify-content: center; height: var(--nav-height); }
 .brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); color: var(--velidion-color-primary); }
 .brand img { display: block; width: auto; }
+.brand__name { font: 700 30px var(--velidion-font-brand); letter-spacing: -0.02em; }
 .footer .brand img { height: 20px; width: auto; }
 
 /* ---- hero ---- */
