@@ -18,6 +18,7 @@
   --tint-2:    color-mix(in srgb, var(--velidion-color-surface) 10%, var(--velidion-color-background));
 
   --maxw: 1080px;
+  --nav-height: 76px;
   --radius: 12px;      /* content: cards, sections, inputs */
   --radius-btn: 10px;  /* actions: buttons */
   --pill: 999px;       /* status/reference chips — the one recurring detail of this design */
@@ -42,6 +43,7 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidd
 
 body {
   margin: 0;
+  padding-top: var(--nav-height);
   overflow-x: hidden;
   font: var(--velidion-text-body);
   color: var(--velidion-color-text);
@@ -113,17 +115,26 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .btn-ghost { background: transparent; color: var(--velidion-color-text); border-color: var(--line); }
 .btn-ghost:hover { border-color: var(--velidion-color-secondary); color: var(--velidion-color-secondary); }
 
-/* ---- nav ---- */
+/* ---- nav ----
+   Fixed — never moves. Solid brand-background at rest; transitions to a
+   translucent/blurred "frosted" treatment once the page scrolls, so content
+   shows through, fuzzed, underneath it. Reverses the same way scrolling back
+   to the top. */
 .nav {
-  position: sticky; top: 0; z-index: 20;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  background: var(--velidion-color-background);
+  border-bottom: 1px solid transparent;
+  transition: background-color .35s ease, backdrop-filter .35s ease, border-color .35s ease;
+}
+.nav.is-scrolled {
   background: color-mix(in srgb, var(--velidion-color-background) 82%, transparent);
   backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid var(--line);
+  border-bottom-color: var(--line);
 }
-.nav__row { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.nav__row { display: flex; align-items: center; justify-content: center; height: var(--nav-height); }
 .brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); color: var(--velidion-color-primary); }
-.brand img { display: block; height: 26px; width: auto; }
-.footer .brand img { height: 20px; }
+.brand img { display: block; width: auto; }
+.footer .brand img { height: 20px; width: auto; }
 
 /* ---- hero ---- */
 .hero {

@@ -1,13 +1,16 @@
 ---
-import Logo from './Logo.astro';
 ---
 
 <header class="nav">
   <div class="wrap nav__row">
     <a class="brand" href="/" aria-label="Velidion home">
-      <Logo size={26} />
-      Velidion
+      <img src="/wordmark.png" alt="Velidion" height="40" width="54" loading="eager" decoding="async" />
     </a>
-    <a class="btn btn-ghost" href="#talk">Talk to us</a>
   </div>
 </header>
+<script>
+  const nav = document.querySelector('.nav');
+  const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 4);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
