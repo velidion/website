@@ -18,7 +18,7 @@
   --tint-2:    color-mix(in srgb, var(--velidion-color-surface) 10%, var(--velidion-color-background));
 
   --maxw: 1080px;
-  --nav-height: 76px;
+  --nav-height: 57px;
   --radius: 12px;      /* content: cards, sections, inputs */
   --radius-btn: 10px;  /* actions: buttons */
   --pill: 999px;       /* status/reference chips — the one recurring detail of this design */
