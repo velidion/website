@@ -65,11 +65,12 @@ a:hover { color: var(--velidion-color-primary); }
 .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
 
 /* ---- vertical guide lines ----
-   Static, full-page-height rules sitting 0.25in outside the content edge,
-   matching the nav's border exactly (same --line color, 1px) but always
-   visible — no fade, no scroll trigger. Sit above the nav (z-index 20) so
-   they read as running over it, not tucked underneath. */
-body::before, body::after {
+   Static, full-page-height rules sitting 0.25in outside the content edge
+   (body::before/::after), plus a second pair 1in further outside that
+   (html::before/::after) — same --line color, 1px, always visible, no
+   fade, no scroll trigger. Sit above the nav (z-index 20) so they read as
+   running over it, not tucked underneath. */
+body::before, body::after, html::before, html::after {
   content: "";
   position: fixed;
   top: 0;
@@ -81,6 +82,8 @@ body::before, body::after {
 }
 body::before { left: calc((100vw - var(--maxw)) / 2 - 24px); }
 body::after { right: calc((100vw - var(--maxw)) / 2 - 24px); }
+html::before { left: calc((100vw - var(--maxw)) / 2 - 120px); }
+html::after { right: calc((100vw - var(--maxw)) / 2 - 120px); }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
