@@ -98,23 +98,6 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .lead { font: var(--velidion-text-body-lg); color: var(--ink-soft); }
 .muted { color: var(--muted); }
 
-/* ---- buttons ----
-   Rounded rect for actions, full pill reserved for chips — a deliberate
-   two-tier shape language rather than one radius used everywhere. */
-.btn {
-  display: inline-flex; align-items: center; gap: .5em;
-  font: var(--velidion-text-body);
-  font-weight: 500;
-  padding: .8em 1.4em; border-radius: var(--radius-btn);
-  border: 1px solid transparent; cursor: pointer;
-  transition: transform .08s ease, background .15s ease, border-color .15s ease, color .15s ease;
-}
-.btn:active { transform: translateY(1px); }
-.btn-primary { background: var(--velidion-color-primary); color: var(--velidion-color-background); }
-.btn-primary:hover { background: var(--velidion-color-secondary); color: var(--velidion-color-background); }
-.btn-ghost { background: transparent; color: var(--velidion-color-text); border-color: var(--line); }
-.btn-ghost:hover { border-color: var(--velidion-color-secondary); color: var(--velidion-color-secondary); }
-
 /* ---- nav ----
    Fixed — never moves. Solid brand-background at rest; transitions to a
    translucent/blurred "frosted" treatment once the page scrolls, so content
@@ -146,7 +129,6 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 }
 .hero h1 { max-width: min(16ch, 100%); margin-inline: auto; }
 .hero .lead { max-width: 54ch; margin-top: var(--space-5); margin-inline: auto; }
-.hero__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4); margin-top: var(--space-6); }
 .hero__status { margin-top: var(--space-6); }
 
 /* ---- generic section header ---- */
@@ -224,5 +206,4 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 /* respect reduced motion */
 @media (prefers-reduced-motion: reduce){
   html { scroll-behavior: auto; }
-  .btn { transition: none; }
 }
