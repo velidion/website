@@ -40,12 +40,13 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; overscroll-behavior: none; }
 
 body {
   margin: 0;
   padding-top: var(--nav-height);
   overflow-x: hidden;
+  overscroll-behavior: none;
   font: var(--velidion-text-body);
   color: var(--velidion-color-text);
   background: var(--velidion-color-background);
@@ -351,7 +352,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .nav-contact {
   display: inline-flex; align-items: center; gap: .35em;
   background: #eaedf0;
-  color: var(--velidion-color-primary);
+  color: var(--ink-soft);
   font: var(--velidion-text-body-lg);
   font-family: var(--velidion-font-ui);
   font-size: 15.125px;
@@ -364,7 +365,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .nav-contact svg { flex-shrink: 0; position: relative; top: 1px; }
 .nav-contact:hover {
   background: color-mix(in srgb, #eaedf0 65%, white);
-  color: var(--velidion-color-primary);
+  color: var(--ink-soft);
 }
 
 /* ---- hero ---- */
