@@ -12,6 +12,7 @@
   /* derived, low-opacity utilities (brand doc reserves "Border/Divider"
      for future expansion — until then, derive hairlines from Text) */
   --line:      color-mix(in srgb, var(--velidion-color-text) 12%, transparent);
+  --line-solid: color-mix(in srgb, var(--velidion-color-text) 12%, var(--velidion-color-background));
   --ink-soft:  color-mix(in srgb, var(--velidion-color-text) 82%, white);
   --muted:     color-mix(in srgb, var(--velidion-color-text) 52%, white);
   --tint:      color-mix(in srgb, var(--velidion-color-surface) 6%, var(--velidion-color-background));
@@ -149,20 +150,22 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   backdrop-filter: saturate(140%) blur(10px);
 }
 /* diamond markers where the two inner vertical guide lines cross the nav's
-   bottom border — static, fixed to the nav's plane, always on top. */
+   bottom border — static, fixed to the nav's plane, always on top. Opaque
+   (--line-solid, not --line) so the guide lines don't show through, without
+   changing the guide lines themselves. */
 .nav::before, .nav::after {
   content: "";
   position: fixed;
-  top: var(--nav-height);
-  width: 8px;
-  height: 8px;
+  top: calc(var(--nav-height) + 0.5px);
+  width: 6px;
+  height: 6px;
   background: #ffffff;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-solid);
   z-index: 22;
   pointer-events: none;
 }
-.nav::before { left: calc((100vw - var(--maxw)) / 2 + 10px); transform: translate(-50%, -50%) rotate(45deg); }
-.nav::after { right: calc((100vw - var(--maxw)) / 2 + 10px); transform: translate(50%, -50%) rotate(45deg); }
+.nav::before { left: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
+.nav::after { right: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 .nav__row { display: flex; align-items: center; justify-content: space-between; height: var(--nav-height); }
 .brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); font-size: 12px; color: var(--velidion-color-primary); }
 .brand img { display: block; width: auto; }
