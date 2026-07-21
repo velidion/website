@@ -17,7 +17,7 @@
   --tint:      color-mix(in srgb, var(--velidion-color-surface) 6%, var(--velidion-color-background));
   --tint-2:    color-mix(in srgb, var(--velidion-color-surface) 10%, var(--velidion-color-background));
 
-  --maxw: 1080px;
+  --maxw: 1176px;
   --nav-height: 57px;
   --radius: 12px;      /* content: cards, sections, inputs */
   --radius-btn: 10px;  /* actions: buttons */
