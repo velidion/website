@@ -187,7 +187,18 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .stat__src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---- belief list ---- */
-.tint { background: color-mix(in srgb, #034078 8%, var(--velidion-color-background)); border-block: 1px solid var(--line); }
+.tint { border-block: 1px solid var(--line); position: relative; }
+.tint::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: calc(var(--maxw) - 20px); /* matches the gap between the body::before/::after guide lines */
+  transform: translateX(-50%);
+  background: color-mix(in srgb, #034078 8%, var(--velidion-color-background));
+  z-index: -1;
+}
 .beliefs { display: grid; gap: var(--space-6); margin-top: var(--space-7); }
 @media (min-width: 720px){ .beliefs { grid-template-columns: repeat(3, 1fr); gap: var(--space-7); } }
 .belief__k {
