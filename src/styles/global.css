@@ -84,8 +84,6 @@ body::before { left: calc((100vw - var(--maxw)) / 2 - 1px); }
 body::after { right: calc((100vw - var(--maxw)) / 2 - 1px); }
 html::before { left: calc((100vw - var(--maxw)) / 2 - 95px); }
 html::after { right: calc((100vw - var(--maxw)) / 2 - 95px); }
-html::before { left: calc((100vw - var(--maxw)) / 2 - 200px); }
-html::after { right: calc((100vw - var(--maxw)) / 2 - 200px); }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
@@ -143,16 +141,15 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .footer .brand { font-weight: 500; }
 .footer .brand img { height: 20px; width: auto; }
 .nav-contact {
-  display: inline-flex; align-items: center; gap: .5em;
+  display: inline-flex; align-items: center;
   background: var(--velidion-color-primary);
   color: var(--velidion-color-background);
   font: var(--velidion-text-body-lg);
   line-height: 1;
-  padding: .35em 1em;
-  border-radius: var(--radius-btn);
+  padding: .35em .8em;
+  border-radius: 3px;
 }
-.nav-contact:hover { background: var(--velidion-color-secondary); }
-.nav-contact svg { flex-shrink: 0; }
+.nav-contact:hover { background: #001F54; color: var(--velidion-color-background); }
 
 /* ---- hero ---- */
 .hero {
