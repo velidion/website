@@ -84,6 +84,8 @@ body::before { left: calc((100vw - var(--maxw)) / 2 - 1px); }
 body::after { right: calc((100vw - var(--maxw)) / 2 - 1px); }
 html::before { left: calc((100vw - var(--maxw)) / 2 - 95px); }
 html::after { right: calc((100vw - var(--maxw)) / 2 - 95px); }
+html::before { left: calc((100vw - var(--maxw)) / 2 - 200px); }
+html::after { right: calc((100vw - var(--maxw)) / 2 - 200px); }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
