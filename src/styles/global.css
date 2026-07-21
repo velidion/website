@@ -170,7 +170,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .stat__src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---- belief list ---- */
-.tint { background: var(--tint); border-block: 1px solid var(--line); }
+.tint { background: #034078; border-block: 1px solid var(--line); }
 .beliefs { display: grid; gap: var(--space-6); margin-top: var(--space-7); }
 @media (min-width: 720px){ .beliefs { grid-template-columns: repeat(3, 1fr); gap: var(--space-7); } }
 .belief__k {
