@@ -1,56 +1,67 @@
 ---
 interface Props {
-  contactEmail: string;
+    contactEmail: string;
 }
 const { contactEmail } = Astro.props;
 ---
 
 <header class="nav">
-  <div class="wrap nav__row">
-    <a class="brand" href="/" aria-label="Velidion home">
-      <img src="/logo-mark-gradient.svg" alt="" height="30" width="57" loading="eager" decoding="async" />
-      <span class="brand__name">Velidion</span>
-    </a>
-    <a class="nav-contact" href={`mailto:${contactEmail}`}
-      >Contact<svg
-        viewBox="0 0 24 24"
-        width="1em"
-        height="1em"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-        ><rect x="3" y="5" width="18" height="14" rx="2"></rect><path
-          d="m3 7 9 6 9-6"
-        ></path></svg
-      ></a
-    >
-  </div>
+    <div class="wrap nav__row">
+        <a class="brand" href="/" aria-label="Velidion home">
+            <img
+                src="/logo-mark-gradient.svg"
+                alt=""
+                height="30"
+                width="57"
+                loading="eager"
+                decoding="async"
+            />
+            <span class="brand__name">Velidion</span>
+        </a>
+        <a class="nav-contact" href={`mailto:${contactEmail}`}
+            ><svg
+                viewBox="0 0 24 24"
+                width="1em"
+                height="1em"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                ><rect x="3" y="5" width="18" height="14" rx="2"></rect><path
+                    d="m3 7 9 6 9-6"></path></svg
+            ></a
+        >
+    </div>
 </header>
 <script>
-  const nav = document.querySelector('.nav');
-  const onScroll = () => nav?.classList.toggle('is-scrolled', window.scrollY > 4);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+    const nav = document.querySelector(".nav");
+    const onScroll = () =>
+        nav?.classList.toggle("is-scrolled", window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Section-boundary diamond markers (.hmark-in/.hmark-out) need z-index:22
-  // to render above the vertical guide lines, which unavoidably also puts
-  // them above the nav bar. Hide them individually once scrolling brings
-  // them into the nav's own height band, so they disappear the same way
-  // the section border line they sit on already does.
-  const navHeight = () =>
-    parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 0;
-  const marks = document.querySelectorAll('.hmark-in, .hmark-out');
-  const updateMarks = () => {
-    const h = navHeight();
-    marks.forEach((el) => {
-      const hidden = el.getBoundingClientRect().top < h;
-      el.classList.toggle('hmark-hidden', hidden);
-    });
-  };
-  updateMarks();
-  window.addEventListener('scroll', updateMarks, { passive: true });
-  window.addEventListener('resize', updateMarks);
+    // Section-boundary diamond markers (.hmark-in/.hmark-out) need z-index:22
+    // to render above the vertical guide lines, which unavoidably also puts
+    // them above the nav bar. Hide them individually once scrolling brings
+    // them into the nav's own height band, so they disappear the same way
+    // the section border line they sit on already does.
+    const navHeight = () =>
+        parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue(
+                "--nav-height",
+            ),
+        ) || 0;
+    const marks = document.querySelectorAll(".hmark-in, .hmark-out");
+    const updateMarks = () => {
+        const h = navHeight();
+        marks.forEach((el) => {
+            const hidden = el.getBoundingClientRect().top < h;
+            el.classList.toggle("hmark-hidden", hidden);
+        });
+    };
+    updateMarks();
+    window.addEventListener("scroll", updateMarks, { passive: true });
+    window.addEventListener("resize", updateMarks);
 </script>

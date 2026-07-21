@@ -40,13 +40,13 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; overscroll-behavior: none; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; overscroll-behavior-y: contain; }
 
 body {
   margin: 0;
   padding-top: var(--nav-height);
   overflow-x: hidden;
-  overscroll-behavior: none;
+  overscroll-behavior-y: contain;
   font: var(--velidion-text-body);
   color: var(--velidion-color-text);
   background: var(--velidion-color-background);
