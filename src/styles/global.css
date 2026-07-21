@@ -163,6 +163,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   font-size: 15.125px;
   line-height: 1;
   padding: .5em .7em;
+  border: 1px solid var(--line);
   border-radius: 3px;
   transition: background-color .1s ease;
 }
