@@ -180,7 +180,9 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .hero h1 { max-width: min(20ch, 100%); margin-inline: auto; }
 .hero .lead { max-width: calc(54ch + 117px); margin-top: var(--space-5); margin-inline: auto; }
 .hero__status { margin-top: var(--space-6); }
-.problem { padding-block: 0; }
+.problem { border-top: 1px solid var(--line); text-align: center; }
+.problem h2 { margin-inline: auto; }
+.problem .lead { margin-top: var(--space-5); margin-inline: auto; max-width: 54ch; }
 
 /* ---- generic section header ---- */
 .sec-head { max-width: 60ch; }
