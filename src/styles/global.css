@@ -192,10 +192,11 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
    (section borders) instead of the nav's own border. Unlike the nav set,
    these are NOT position:fixed — they're anchored to each section via a
    zero-size marker span (.hmark-in for the inner vertical-line pair,
-   .hmark-out for the outer pair), so they scroll normally with the page
-   and pass underneath the fixed nav bar and its diamonds (no explicit
-   z-index needed: these sections don't establish stacking contexts, so
-   default stacking already loses to the nav's z-index:20). */
+   .hmark-out for the outer pair), so they scroll normally with the page.
+   Still need z-index:22 though: these sections don't establish stacking
+   contexts, so without it the diamonds default to z-index:auto and lose
+   to the guide lines' z-index:21 — same fix as the nav diamonds, just
+   applied here instead of relying on default stacking. */
 .hmark-in, .hmark-out {
   position: absolute;
   top: -1px;
@@ -211,6 +212,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   height: 6px;
   background: #ffffff;
   border: 1px solid var(--line-solid);
+  z-index: 22;
   pointer-events: none;
 }
 .hmark-in::before { left: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
