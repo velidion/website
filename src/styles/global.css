@@ -64,6 +64,23 @@ a:hover { color: var(--velidion-color-primary); }
 
 .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
 
+/* ---- vertical guide lines ----
+   Static, full-page-height rules sitting 0.25in outside the content edge,
+   matching the nav's scrolled-state border exactly (same --line color, 1px)
+   but always visible — no fade, no scroll trigger. */
+body::before, body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  background: var(--line);
+  pointer-events: none;
+  z-index: 1;
+}
+body::before { left: calc((100vw - var(--maxw)) / 2 - 24px); }
+body::after { right: calc((100vw - var(--maxw)) / 2 - 24px); }
+
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
 /* ---- chips / reference labels ----
