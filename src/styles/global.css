@@ -81,12 +81,15 @@ a:hover { color: var(--velidion-color-primary); }
    from each edge — the same 120px total inset), same centering technique
    as .tint::before. Footer's own ::before/::after are already used for its
    fixed nav-diamond markers, so it gets a real .noise-fill span instead of
-   ::after for this layer. z-index:0 (not -1): Chromium fails to rasterize
-   this filter-based SVG background at all when the element has a
-   *negative* z-index — the texture silently renders blank. z-index:0
-   avoids that, and .wrap now carries position:relative + z-index:1 so real
-   content still stacks above this layer despite it no longer being
-   negative. */
+   the .noise-bg class (deliberately NOT applied to <footer> itself — if it
+   were, .noise-bg::after would also match footer's own ::after and fight
+   with .footer::after's diamond over the exact same pseudo-element, which
+   silently breaks the diamond's rendering even with !important overrides).
+   z-index:0 (not -1): Chromium fails to rasterize this filter-based SVG
+   background at all when the element has a *negative* z-index — the
+   texture silently renders blank. z-index:0 avoids that, and .wrap now
+   carries position:relative + z-index:1 so real content still stacks
+   above this layer despite it no longer being negative. */
 .noise-bg { position: relative; background-color: #FEFCFB; }
 .noise-bg::after,
 .footer .noise-fill,
@@ -152,7 +155,7 @@ main::after { right: 60px; }
      the scrolling section-boundary outer pairs) need to vanish along with
      the line itself — otherwise they're left floating with no line
      through them once main::before/::after above are hidden. */
-  .footer__row::before, .footer__row::after,
+  .nav-diamond-outer::before, .nav-diamond-outer::after,
   .hmark-out::before, .hmark-out::after { display: none; }
 
   /* Below this same breakpoint, body's and html's lines stop tracking
@@ -251,10 +254,14 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .footer::before { left: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
 .footer::after { right: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 /* same diamond markers, at the outer pair of vertical guide lines (main::before/::after,
-   fixed 60px from the edge) instead of the inner pair. Hosted on .footer__row for the
-   same reason as above — it has no position/z-index of its own, so it doesn't trap
-   these pseudo-elements inside a capped stacking context. */
-.footer__row::before, .footer__row::after {
+   fixed 60px from the edge) instead of the inner pair. Hosted on a dedicated real span
+   (.nav-diamond-outer, a direct child of <footer>) rather than .footer__row: .footer__row
+   is also .wrap, and .wrap now carries position:relative + z-index:1 (for the noise-grain
+   layering below) — that gives .footer__row its own stacking context, which traps these
+   ::before/::after inside it at effectively z:1 no matter what z-index they're given
+   locally, so they lose to the guide lines (z:21) instead of beating them. A plain span
+   with no z-index of its own doesn't have that problem. */
+.nav-diamond-outer::before, .nav-diamond-outer::after {
   content: "";
   position: fixed;
   top: calc(var(--nav-height) + 0.5px);
@@ -265,8 +272,8 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   z-index: 22;
   pointer-events: none;
 }
-.footer__row::before { left: calc(60px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
-.footer__row::after { right: calc(60px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
+.nav-diamond-outer::before { left: calc(60px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
+.nav-diamond-outer::after { right: calc(60px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 
 /* same diamond markers again, but at every horizontal line below the nav
    (section borders) instead of the nav's own border. Unlike the nav set,
@@ -441,7 +448,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .form-note { margin-top: var(--space-3); font-size: .8rem; color: var(--muted); }
 
 /* ---- footer ---- */
-.footer { border-top: 1px solid var(--line); padding-block: var(--space-7); color: var(--muted); font: var(--velidion-text-body-sm); position: relative; }
+.footer { border-top: 1px solid var(--line); padding-block: var(--space-7); color: var(--muted); font: var(--velidion-text-body-sm); position: relative; background-color: #FEFCFB; }
 .footer__row { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-8); align-items: center; justify-content: space-between; }
 .footer a { color: var(--ink-soft); }
 
