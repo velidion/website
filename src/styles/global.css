@@ -124,7 +124,6 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 /* ---- hero ---- */
 .hero {
   padding-block: clamp(56px, 9vw, 110px);
-  background: radial-gradient(120% 90% at 85% -10%, var(--tint) 0%, transparent 55%);
   text-align: center;
 }
 .hero h1 { max-width: min(16ch, 100%); margin-inline: auto; }
