@@ -96,8 +96,8 @@ main::before, main::after {
   pointer-events: none;
   z-index: 21;
 }
-main::before { left: calc((100vw - var(--maxw)) / 2 - 200px); }
-main::after { right: calc((100vw - var(--maxw)) / 2 - 200px); }
+main::before { left: 60px; }
+main::after { right: 60px; }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
