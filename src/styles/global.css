@@ -66,8 +66,9 @@ a:hover { color: var(--velidion-color-primary); }
 
 /* ---- vertical guide lines ----
    Static, full-page-height rules sitting 0.25in outside the content edge,
-   matching the nav's scrolled-state border exactly (same --line color, 1px)
-   but always visible — no fade, no scroll trigger. */
+   matching the nav's border exactly (same --line color, 1px) but always
+   visible — no fade, no scroll trigger. Sit above the nav (z-index 20) so
+   they read as running over it, not tucked underneath. */
 body::before, body::after {
   content: "";
   position: fixed;
@@ -76,7 +77,7 @@ body::before, body::after {
   height: 100vh;
   background: var(--line);
   pointer-events: none;
-  z-index: 1;
+  z-index: 21;
 }
 body::before { left: calc((100vw - var(--maxw)) / 2 - 24px); }
 body::after { right: calc((100vw - var(--maxw)) / 2 - 24px); }
@@ -123,13 +124,12 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 20;
   background: var(--velidion-color-background);
-  border-bottom: 1px solid transparent;
-  transition: background-color .35s ease, backdrop-filter .35s ease, border-color .35s ease;
+  border-bottom: 1px solid var(--line);
+  transition: background-color .35s ease, backdrop-filter .35s ease;
 }
 .nav.is-scrolled {
   background: color-mix(in srgb, var(--velidion-color-background) 82%, transparent);
   backdrop-filter: saturate(140%) blur(10px);
-  border-bottom-color: var(--line);
 }
 .nav__row { display: flex; align-items: center; justify-content: flex-start; height: var(--nav-height); }
 .brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); font-size: 12px; color: var(--velidion-color-primary); }
