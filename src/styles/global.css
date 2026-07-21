@@ -107,6 +107,12 @@ main::after { right: 60px; }
    must be updated by hand if --maxw ever changes.) */
 @media (max-width: 1276px) {
   main::before, main::after { display: none; }
+  /* the diamonds threaded on main's lines (the nav's own outer pair, and
+     the scrolling section-boundary outer pairs) need to vanish along with
+     the line itself — otherwise they're left floating with no line
+     through them once main::before/::after above are hidden. */
+  .footer__row::before, .footer__row::after,
+  .hmark-out::before, .hmark-out::after { display: none; }
 }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
@@ -226,6 +232,15 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 }
 .hmark-in::before { left: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
 .hmark-in::after { right: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
+/* These diamonds need z-index:22 to beat the guide lines (21), but that
+   unavoidably also beats the nav (20) — there's no integer that satisfies
+   both "above the lines" and "below the nav" at once. So instead of
+   fighting that with z-index, Nav.astro's scroll listener toggles this
+   class once a marker's scroll position would put it inside the nav's
+   band, and it's simply display:none while that's true — matching how
+   the section's own border line already gets covered by the nav normally. */
+.hmark-in.hmark-hidden::before, .hmark-in.hmark-hidden::after,
+.hmark-out.hmark-hidden::before, .hmark-out.hmark-hidden::after { display: none; }
 .hmark-out::before { left: calc(60px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
 .hmark-out::after { right: calc(60px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 .nav__row { display: flex; align-items: center; justify-content: space-between; height: var(--nav-height); }
