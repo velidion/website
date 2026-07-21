@@ -141,7 +141,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .footer .brand { font-weight: 500; }
 .footer .brand img { height: 20px; width: auto; }
 .nav-contact {
-  display: inline-flex; align-items: center;
+  display: inline-flex; align-items: center; gap: .35em;
   background: #eaedf0;
   color: var(--velidion-color-primary);
   font: var(--velidion-text-body-lg);
@@ -151,6 +151,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   padding: .4em 1.1em;
   border-radius: 3px;
 }
+.nav-contact svg { flex-shrink: 0; }
 .nav-contact:hover {
   background: color-mix(in srgb, #eaedf0 88%, black);
   box-shadow: inset 0 1px 2px color-mix(in srgb, black 15%, transparent);
