@@ -85,6 +85,20 @@ body::after { right: calc((100vw - var(--maxw)) / 2 + 10px); }
 html::before { left: calc((100vw - var(--maxw)) / 2 - 50px); }
 html::after { right: calc((100vw - var(--maxw)) / 2 - 50px); }
 
+/* ---- 2 more vertical lines on either side (main::before/::after) ---- */
+main::before, main::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  background: var(--line);
+  pointer-events: none;
+  z-index: 21;
+}
+main::before { left: calc((100vw - var(--maxw)) / 2 - 200px); }
+main::after { right: calc((100vw - var(--maxw)) / 2 - 200px); }
+
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
 /* ---- chips / reference labels ----
