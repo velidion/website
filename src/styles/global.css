@@ -146,8 +146,8 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   padding-block: clamp(56px, 9vw, 110px);
   text-align: center;
 }
-.hero h1 { max-width: min(16ch, 100%); margin-inline: auto; }
-.hero .lead { max-width: 54ch; margin-top: var(--space-5); margin-inline: auto; }
+.hero h1 { max-width: min(20ch, 100%); margin-inline: auto; }
+.hero .lead { max-width: calc(54ch + 117px); margin-top: var(--space-5); margin-inline: auto; }
 .hero__status { margin-top: var(--space-6); }
 .problem { padding-block: 0; }
 
