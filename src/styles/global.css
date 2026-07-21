@@ -80,8 +80,8 @@ body::before, body::after, html::before, html::after {
   pointer-events: none;
   z-index: 21;
 }
-body::before { left: calc((100vw - var(--maxw)) / 2 - 1px); }
-body::after { right: calc((100vw - var(--maxw)) / 2 - 1px); }
+body::before { left: calc((100vw - var(--maxw)) / 2 + 1px); }
+body::after { right: calc((100vw - var(--maxw)) / 2 + 1px); }
 html::before { left: calc((100vw - var(--maxw)) / 2 - 95px); }
 html::after { right: calc((100vw - var(--maxw)) / 2 - 95px); }
 
