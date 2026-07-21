@@ -63,7 +63,43 @@ p  { margin: 0; }
 a  { color: var(--velidion-color-secondary); text-decoration: none; }
 a:hover { color: var(--velidion-color-primary); }
 
-.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
+.wrap { position: relative; z-index: 1; width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
+
+/* ---- subtle background grain ----
+   Applied to the currently-plain-white sections below the nav (hero,
+   problem, belief, credibility, footer) — not the nav itself, and not the
+   .tint sections, which already have their own fill. Base stays #FEFCFB;
+   the noise speckle is tinted with --tint-2's actual resolved color
+   (surface mixed 10% into background ≈ #E6F0F2), baked into the SVG filter
+   since a filter can't reference a CSS custom property. A gamma curve on
+   the alpha channel pushes most of the noise toward fully transparent so
+   only the peaks show as soft, sparse blobs rather than a wall-to-wall
+   wash. Clipped horizontally to the gap between the two outermost guide
+   lines (main::before/::after, 60px from each edge — the same 120px total
+   inset), same centering technique as .tint::before. Footer's own
+   ::before/::after are already used for its fixed nav-diamond markers, so
+   it gets a real .noise-fill span instead of ::after for this layer.
+   z-index:0 (not -1): Chromium fails to rasterize this filter-based SVG
+   background at all when the element has a *negative* z-index — the
+   texture silently renders blank. z-index:0 avoids that, and .wrap now
+   carries position:relative + z-index:1 so real content still stacks
+   above this layer despite it no longer being negative. */
+.noise-bg { position: relative; background-color: #FEFCFB; }
+.noise-bg::after,
+.footer .noise-fill {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: calc(100vw - 120px);
+  transform: translateX(-50%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.045' numOctaves='4' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix in='noise' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.33 0.33 0.33 0 0' result='alpha'/%3E%3CfeComponentTransfer in='alpha' result='softAlpha'%3E%3CfeFuncA type='gamma' amplitude='1' exponent='2' offset='0'/%3E%3C/feComponentTransfer%3E%3CfeFlood flood-color='%23E6F0F2' result='tintColor'/%3E%3CfeComposite in='tintColor' in2='softAlpha' operator='in'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  pointer-events: none;
+  z-index: 0;
+}
 
 /* ---- vertical guide lines ----
    Static, full-page-height rules sitting 0.25in outside the content edge
