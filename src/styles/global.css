@@ -145,9 +145,10 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   background: #eaedf0;
   color: var(--velidion-color-primary);
   font: var(--velidion-text-body-lg);
-  font-size: 16.5px;
+  font-family: var(--velidion-font-ui);
+  font-size: 15.125px;
   line-height: 1;
-  padding: .35em .6em;
+  padding: .4em 1.1em;
   border-radius: 3px;
 }
 .nav-contact:hover {
