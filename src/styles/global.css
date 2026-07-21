@@ -99,6 +99,15 @@ main::before, main::after {
 }
 main::before { left: 60px; }
 main::after { right: 60px; }
+/* main's fixed 60px offset crosses body's content-relative offset exactly
+   when (100vw - var(--maxw)) / 2 + 10px = 60px, i.e. 100vw = var(--maxw) + 100px.
+   With --maxw:1176px that's 1276px — hide main's lines at/below that width so
+   they vanish right as they'd overlap/pass body's lines, instead of crossing
+   them. (Media queries can't reference custom properties, so this threshold
+   must be updated by hand if --maxw ever changes.) */
+@media (max-width: 1276px) {
+  main::before, main::after { display: none; }
+}
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
