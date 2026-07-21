@@ -80,10 +80,10 @@ body::before, body::after, html::before, html::after {
   pointer-events: none;
   z-index: 21;
 }
-body::before { left: calc((100vw - var(--maxw)) / 2 - 24px); }
-body::after { right: calc((100vw - var(--maxw)) / 2 - 24px); }
-html::before { left: calc((100vw - var(--maxw)) / 2 - 120px); }
-html::after { right: calc((100vw - var(--maxw)) / 2 - 120px); }
+body::before { left: calc((100vw - var(--maxw)) / 2 - 12px); }
+body::after { right: calc((100vw - var(--maxw)) / 2 - 12px); }
+html::before { left: calc((100vw - var(--maxw)) / 2 - 108px); }
+html::after { right: calc((100vw - var(--maxw)) / 2 - 108px); }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 
