@@ -128,13 +128,15 @@ main::after { right: 60px; }
   /* .wrap normally tracks the viewport too (width:100% up to --maxw), so
      without this it would keep shrinking past the now-frozen body lines,
      pulling the nav mark/button and every section's content in along
-     with it. Freezing its inset to 70px (body's frozen 60px + the
-     original 10px gap between body's line and the wrap edge) keeps that
-     10px relationship intact, so content stays pinned to the lines and
-     the space BETWEEN elements (e.g. the nav mark and the Contact button)
-     is what shrinks instead. width:auto (not 100%) avoids over-constraining
+     with it. body's line sits 10px INSIDE (toward center from) wrap's own
+     edge — body::before is wrap-edge + 10px — so wrap's edge is 10px
+     OUTSIDE body's frozen 60px, i.e. 50px, not 70px. Freezing here at 50px
+     keeps that 10px relationship (and pixel-for-pixel continuity right at
+     the breakpoint) intact, so content stays pinned to the lines and the
+     space BETWEEN elements (e.g. the nav mark and the Contact button) is
+     what shrinks instead. width:auto (not 100%) avoids over-constraining
      against the fixed margins. */
-  .wrap { width: auto; margin-inline: 70px; }
+  .wrap { width: auto; margin-inline: 50px; }
 }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
