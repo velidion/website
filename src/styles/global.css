@@ -142,14 +142,19 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .footer .brand img { height: 20px; width: auto; }
 .nav-contact {
   display: inline-flex; align-items: center;
-  background: var(--velidion-color-primary);
-  color: var(--velidion-color-background);
+  background: #eaedf0;
+  color: var(--velidion-color-primary);
   font: var(--velidion-text-body-lg);
+  font-size: 16.5px;
   line-height: 1;
-  padding: .35em .8em;
+  padding: .35em .6em;
   border-radius: 3px;
 }
-.nav-contact:hover { background: #001F54; color: var(--velidion-color-background); }
+.nav-contact:hover {
+  background: color-mix(in srgb, #eaedf0 88%, black);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, black 15%, transparent);
+  color: var(--velidion-color-primary);
+}
 
 /* ---- hero ---- */
 .hero {
