@@ -150,11 +150,11 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   line-height: 1;
   padding: .4em .6em;
   border-radius: 3px;
-  transition: background-color .25s ease;
+  transition: background-color .1s ease;
 }
 .nav-contact svg { flex-shrink: 0; position: relative; top: 1px; }
 .nav-contact:hover {
-  background: color-mix(in srgb, #eaedf0 85%, white);
+  background: color-mix(in srgb, #eaedf0 65%, white);
   color: var(--velidion-color-primary);
 }
 
