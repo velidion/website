@@ -265,6 +265,19 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .hmark-out.hmark-hidden::before, .hmark-out.hmark-hidden::after { display: none; }
 .hmark-out::before { left: calc(60px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
 .hmark-out::after { right: calc(60px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
+/* Placed after the rules above (not inside the earlier @media block near
+   main::before/::after) on purpose: .footer::before/::after and
+   .hmark-in::before/::after are defined below that block, so an override
+   placed before them there would lose the cascade to these unconditional
+   calc() rules regardless of the media query. Freezing here — after them,
+   same specificity, later wins — pins these diamonds to the same frozen
+   60px (plus their existing 0.5px sub-pixel correction) that body::before/
+   ::after freeze to, so they track the now-static line instead of
+   continuing to drift inward on their own live formula. */
+@media (max-width: 1276px) {
+  .footer::before, .hmark-in::before { left: 60.5px; }
+  .footer::after, .hmark-in::after { right: 60.5px; }
+}
 .nav__row { display: flex; align-items: center; justify-content: space-between; height: var(--nav-height); }
 .brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); font-size: 12px; color: var(--velidion-color-primary); }
 .brand img { display: block; width: auto; }
