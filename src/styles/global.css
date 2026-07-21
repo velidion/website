@@ -113,6 +113,28 @@ main::after { right: 60px; }
      through them once main::before/::after above are hidden. */
   .footer__row::before, .footer__row::after,
   .hmark-out::before, .hmark-out::after { display: none; }
+
+  /* Below this same breakpoint, body's and html's lines stop tracking
+     viewport width and freeze at exactly the pixel values they had AT
+     1276px (60px and 0px) — the same spot main used to occupy, and the
+     viewport edge, respectively. That keeps a permanent buffer between
+     the viewport edge and body's line instead of it getting eaten up,
+     and keeps the body↔html gap constant instead of collapsing further. */
+  body::before { left: 60px; }
+  body::after { right: 60px; }
+  html::before { left: 0px; }
+  html::after { right: 0px; }
+
+  /* .wrap normally tracks the viewport too (width:100% up to --maxw), so
+     without this it would keep shrinking past the now-frozen body lines,
+     pulling the nav mark/button and every section's content in along
+     with it. Freezing its inset to 70px (body's frozen 60px + the
+     original 10px gap between body's line and the wrap edge) keeps that
+     10px relationship intact, so content stays pinned to the lines and
+     the space BETWEEN elements (e.g. the nav mark and the Contact button)
+     is what shrinks instead. width:auto (not 100%) avoids over-constraining
+     against the fixed margins. */
+  .wrap { width: auto; margin-inline: 70px; }
 }
 
 section { padding-block: clamp(56px, 8vw, var(--space-8)); }
