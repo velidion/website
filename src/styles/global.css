@@ -89,7 +89,8 @@ a:hover { color: var(--velidion-color-primary); }
    negative. */
 .noise-bg { position: relative; background-color: #FEFCFB; }
 .noise-bg::after,
-.footer .noise-fill {
+.footer .noise-fill,
+.tint::after {
   content: "";
   position: absolute;
   top: 0;
@@ -386,8 +387,17 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   width: calc(var(--maxw) - 20px); /* matches the gap between the body::before/::after guide lines */
   transform: translateX(-50%);
   background: color-mix(in srgb, #034078 8%, var(--velidion-color-background));
-  z-index: -1;
+  z-index: 1; /* above .tint::after's grain (z:0) so the solid fill still hides it in
+                 the center; tied with .wrap (also z:1), which still wins on top since
+                 it's later in tree order */
 }
+/* .tint::after (the same grain layer as .noise-bg — see that rule, which
+   .tint::after now joins) is wider (100vw - 120px, the outermost guide
+   lines) than .tint::before's solid fill (var(--maxw) - 20px, the inner
+   pair), so without it the strip between them was plain white — visibly
+   different from the noise-bg sections on either side. Hidden under the
+   opaque solid fill in the center (z:1 above z:0), visible in the two
+   side strips. */
 .beliefs { display: grid; gap: var(--space-6); margin-top: var(--space-7); }
 @media (min-width: 720px){ .beliefs { grid-template-columns: repeat(3, 1fr); gap: var(--space-7); } }
 .belief__k {
