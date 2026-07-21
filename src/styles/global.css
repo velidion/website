@@ -148,7 +148,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   font-family: var(--velidion-font-ui);
   font-size: 15.125px;
   line-height: 1;
-  padding: .4em .9em;
+  padding: .4em .6em;
   border-radius: 3px;
   transition: background-color .25s ease;
 }
