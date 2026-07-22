@@ -53,6 +53,8 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+section { padding-block: clamp(56px, 8vw, var(--space-8)); }
+
 h1, h2, h3, h4 { line-height: 1.12; letter-spacing: -0.01em; margin: 0; }
 h1 { font: var(--velidion-text-h1); color: var(--velidion-color-primary); }
 h2 { font: var(--velidion-text-h2); color: var(--velidion-color-primary); }
@@ -64,6 +66,7 @@ a  { color: var(--velidion-color-secondary); text-decoration: none; }
 a:hover { color: var(--velidion-color-primary); }
 
 .wrap { position: relative; z-index: 1; width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--space-5); }
+.lead { font: var(--velidion-text-body-lg); color: var(--ink-soft); }
 
 /* ---- subtle background grain ----
    Applied to the currently-plain-white sections below the nav (hero,
@@ -197,40 +200,6 @@ main::after { right: 60px; }
   }
 }
 
-section { padding-block: clamp(56px, 8vw, var(--space-8)); }
-
-/* ---- chips / reference labels ----
-   The one signature detail of this design: brand_fonts.md assigns JetBrains
-   Mono to requirement IDs, audit logs, and traceability references. Eyebrows,
-   the status line, and citations all read as small reference tags, so they
-   get the same mono, pill-shaped treatment — a deliberate, on-brand texture
-   rather than a decorative flourish. */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: .55em;
-  font-family: var(--velidion-font-mono);
-  font-size: .75rem;
-  font-weight: 500;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--velidion-color-secondary);
-  background: var(--tint-2);
-  border: 1px solid var(--line);
-  border-radius: var(--pill);
-  padding: .45em 1em;
-}
-.chip .dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--velidion-color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--velidion-color-accent) 20%, transparent);
-  flex-shrink: 0;
-}
-.eyebrow { margin-bottom: var(--space-4); }
-
-.lead { font: var(--velidion-text-body-lg); color: var(--ink-soft); }
-.muted { color: var(--muted); }
-
 /* ---- nav ----
    Fixed — never moves. Solid brand-background at rest; transitions to a
    translucent/blurred "frosted" treatment once the page scrolls, so content
@@ -246,6 +215,31 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   background: color-mix(in srgb, var(--velidion-color-background) 82%, transparent);
   backdrop-filter: saturate(140%) blur(10px);
 }
+.nav__row { display: flex; align-items: center; justify-content: space-between; height: var(--nav-height); }
+.brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); font-size: 12px; color: var(--velidion-color-primary); }
+.brand img { display: block; width: auto; }
+.brand__name { font: 500 22.5px var(--velidion-font-brand); letter-spacing: -0.02em; }
+.footer .brand { font-weight: 500; font-size: 1rem; }
+.footer .brand img { height: 20px; width: auto; }
+.nav-contact {
+  display: inline-flex; align-items: center; gap: .35em;
+  background: #eaedf0;
+  color: var(--ink-soft);
+  font: var(--velidion-text-body-lg);
+  font-family: var(--velidion-font-ui);
+  font-size: 15.125px;
+  line-height: 1;
+  padding: .5em .7em;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  transition: background-color .1s ease;
+}
+.nav-contact svg { flex-shrink: 0; position: relative; top: 1px; }
+.nav-contact:hover {
+  background: color-mix(in srgb, #eaedf0 65%, white);
+  color: var(--ink-soft);
+}
+
 /* diamond markers where the two inner vertical guide lines cross the nav's
    bottom border — static, fixed to the nav's plane, always on top. Opaque
    (--line-solid, not --line) so the guide lines don't show through, without
@@ -342,30 +336,6 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
   .footer::before, .hmark-in::before { left: 30.5px; }
   .footer::after, .hmark-in::after { right: 30.5px; }
 }
-.nav__row { display: flex; align-items: center; justify-content: space-between; height: var(--nav-height); }
-.brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); font-size: 12px; color: var(--velidion-color-primary); }
-.brand img { display: block; width: auto; }
-.brand__name { font: 500 22.5px var(--velidion-font-brand); letter-spacing: -0.02em; }
-.footer .brand { font-weight: 500; font-size: 1rem; }
-.footer .brand img { height: 20px; width: auto; }
-.nav-contact {
-  display: inline-flex; align-items: center; gap: .35em;
-  background: #eaedf0;
-  color: var(--ink-soft);
-  font: var(--velidion-text-body-lg);
-  font-family: var(--velidion-font-ui);
-  font-size: 15.125px;
-  line-height: 1;
-  padding: .5em .7em;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  transition: background-color .1s ease;
-}
-.nav-contact svg { flex-shrink: 0; position: relative; top: 1px; }
-.nav-contact:hover {
-  background: color-mix(in srgb, #eaedf0 65%, white);
-  color: var(--ink-soft);
-}
 
 /* ---- hero ---- */
 .hero {
@@ -374,30 +344,11 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 }
 .hero h1 { max-width: min(20ch, 100%); margin-inline: auto; }
 .hero .lead { max-width: calc(54ch + 117px); margin-top: var(--space-5); margin-inline: auto; }
-.hero__status { margin-top: var(--space-6); }
 .problem { border-top: 1px solid var(--line); text-align: center; position: relative; }
 .problem h2 { margin-inline: auto; }
 .problem .lead { margin-top: var(--space-5); margin-inline: auto; max-width: 54ch; }
 
-/* ---- generic section header ---- */
-.sec-head { max-width: 60ch; }
-.sec-head h2 { margin-bottom: var(--space-4); }
-
-/* ---- stat cards ---- */
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-7); }
-.stat {
-  background: var(--velidion-color-background);
-  border: 1px solid color-mix(in srgb, var(--velidion-color-secondary) 15%, transparent);
-  border-radius: var(--radius);
-  padding: var(--space-5) var(--space-4);
-  box-shadow: var(--shadow);
-}
-.stat__num { font: var(--velidion-text-h2); color: var(--velidion-color-secondary); }
-.stat__txt { margin-top: var(--space-2); color: var(--ink-soft); font: var(--velidion-text-body-sm); line-height: 1.5; }
-.stat__src { margin-top: var(--space-3); font-family: var(--velidion-font-mono); font-size: .7rem; color: var(--muted); }
-.stat__src a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
-
-/* ---- belief list ---- */
+/* ---- tint fill (audience / solution / cta section backgrounds) ---- */
 .tint { border-block: 1px solid var(--line); position: relative; }
 .tint::before {
   content: "";
@@ -428,47 +379,9 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
    different from the noise-bg sections on either side. Hidden under the
    opaque solid fill in the center (z:1 above z:0), visible in the two
    side strips. */
-.beliefs { display: grid; gap: var(--space-6); margin-top: var(--space-7); }
-@media (min-width: 720px){ .beliefs { grid-template-columns: repeat(3, 1fr); gap: var(--space-7); } }
-.belief__k {
-  font-family: var(--velidion-font-mono);
-  font-variant-numeric: tabular-nums;
-  font-size: .8rem; font-weight: 500; letter-spacing: .04em;
-  color: var(--velidion-color-secondary);
-}
 .belief { position: relative; }
-.belief h3 { margin: var(--space-3) 0 var(--space-2); }
-.belief p { color: var(--ink-soft); }
-
-/* ---- audience ---- */
-.audience p { max-width: 62ch; font: var(--velidion-text-body-lg); }
-.audience p.lead { margin-top: var(--space-5); }
 
 .credibility { position: relative; }
-
-/* ---- CTA cards ---- */
-.cta-grid { display: grid; gap: var(--space-5); margin-top: var(--space-7); }
-@media (min-width: 720px){ .cta-grid { grid-template-columns: 1fr 1fr; } }
-.card {
-  border: 1px solid color-mix(in srgb, var(--velidion-color-secondary) 15%, transparent);
-  border-radius: var(--radius);
-  padding: var(--space-6) var(--space-5);
-  background: var(--velidion-color-background);
-  box-shadow: var(--shadow);
-  display: flex; flex-direction: column;
-}
-.card h3 { margin-bottom: var(--space-3); }
-.card p { color: var(--ink-soft); margin-bottom: var(--space-5); }
-.card .btn { margin-top: auto; align-self: flex-start; }
-.field { display: flex; gap: var(--space-3); flex-wrap: wrap; }
-.field input[type="email"]{
-  flex: 1 1 220px; min-width: 0;
-  padding: .8em 1em; font: var(--velidion-text-body); font-family: var(--velidion-font-ui);
-  border: 1px solid var(--line); border-radius: var(--radius-btn); color: var(--velidion-color-text);
-  background: var(--tint);
-}
-.field input[type="email"]:focus { outline: 2px solid var(--velidion-color-accent); outline-offset: 1px; border-color: var(--velidion-color-accent); }
-.form-note { margin-top: var(--space-3); font-size: .8rem; color: var(--muted); }
 
 /* ---- footer ---- */
 .footer { border-top: 1px solid var(--line); padding-block: var(--space-7); color: var(--muted); font: var(--velidion-text-body-sm); position: relative; background-color: #FEFCFB; }
@@ -478,10 +391,6 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 /* ---- footnotes ---- */
 .notes { margin-top: var(--space-2); font-size: .78rem; color: var(--muted); line-height: 1.5; }
 .notes a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
-
-@media (max-width: 640px){
-  .stats { grid-template-columns: 1fr; }
-}
 
 /* respect reduced motion */
 @media (prefers-reduced-motion: reduce){
