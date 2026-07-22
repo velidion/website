@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import SectionMarkers from "../components/SectionMarkers.astro";
+import SectionBoundaryMarks from "../components/SectionBoundaryMarks.astro";
 
 const CONTACT_EMAIL = "hello@velidion.com";
 ---
@@ -29,8 +30,7 @@ const CONTACT_EMAIL = "hello@velidion.com";
 
         <!-- ========================== PROBLEM ========================== -->
         <section class="problem noise-bg">
-            <span class="hmark-in" aria-hidden="true"></span>
-            <span class="hmark-out" aria-hidden="true"></span>
+            <SectionBoundaryMarks />
             <div class="wrap">
                 <h2>Placeholder problem headline</h2>
                 <p class="lead">
@@ -43,36 +43,31 @@ const CONTACT_EMAIL = "hello@velidion.com";
 
         <!-- ========================= AUDIENCE ========================== -->
         <section class="tint audience">
-            <span class="hmark-in" aria-hidden="true"></span>
-            <span class="hmark-out" aria-hidden="true"></span>
+            <SectionBoundaryMarks />
             <div class="wrap"></div>
         </section>
 
         <!-- ========================== BELIEF =========================== -->
         <section class="belief noise-bg">
-            <span class="hmark-in" aria-hidden="true"></span>
-            <span class="hmark-out" aria-hidden="true"></span>
+            <SectionBoundaryMarks />
             <div class="wrap"></div>
         </section>
 
         <!-- ========================= SOLUTION =========================== -->
         <section class="tint solution">
-            <span class="hmark-in" aria-hidden="true"></span>
-            <span class="hmark-out" aria-hidden="true"></span>
+            <SectionBoundaryMarks />
             <div class="wrap"></div>
         </section>
 
         <!-- ======================== CREDIBILITY ========================= -->
         <section class="credibility noise-bg">
-            <span class="hmark-in" aria-hidden="true"></span>
-            <span class="hmark-out" aria-hidden="true"></span>
+            <SectionBoundaryMarks />
             <div class="wrap"></div>
         </section>
 
         <!-- ============================ CTA ============================ -->
         <section class="tint cta">
-            <span class="hmark-in" aria-hidden="true"></span>
-            <span class="hmark-out" aria-hidden="true"></span>
+            <SectionBoundaryMarks />
             <div class="wrap"></div>
         </section>
     </main>
