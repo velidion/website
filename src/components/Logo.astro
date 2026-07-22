@@ -1,15 +1,27 @@
 ---
+// Native pixel dimensions of each logo asset, used to derive width from a
+// requested height so the image never renders stretched.
+const LOGO_ASPECT_RATIO = {
+  solid: 485 / 256, // logo-mark.png
+  gradient: 57 / 30, // logo-mark-gradient.svg
+} as const;
+
 interface Props {
   size?: number;
+  variant?: keyof typeof LOGO_ASPECT_RATIO;
+  alt?: string;
 }
-const { size = 26 } = Astro.props;
+const { size = 26, variant = 'solid', alt = 'Velidion' } = Astro.props;
+
+const src = variant === 'gradient' ? '/logo-mark-gradient.svg' : '/logo-mark.png';
+const width = Math.round(size * LOGO_ASPECT_RATIO[variant]);
 ---
 
 <img
-  src="/logo-mark.png"
-  alt="Velidion"
+  src={src}
+  alt={alt}
   height={size}
-  width={Math.round(size * (485 / 256))}
+  width={width}
   loading="eager"
   decoding="async"
 />

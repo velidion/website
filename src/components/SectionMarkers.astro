@@ -1,0 +1,24 @@
+<script>
+  // Section-boundary diamond markers (.hmark-in/.hmark-out) need z-index:22
+  // to render above the vertical guide lines, which unavoidably also puts
+  // them above the nav bar. Hide them individually once scrolling brings
+  // them into the nav's own height band, so they disappear the same way
+  // the section border line they sit on already does.
+  const navHeight = () =>
+    parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--nav-height",
+      ),
+    ) || 0;
+  const marks = document.querySelectorAll(".hmark-in, .hmark-out");
+  const updateMarks = () => {
+    const h = navHeight();
+    marks.forEach((el) => {
+      const hidden = el.getBoundingClientRect().top < h;
+      el.classList.toggle("hmark-hidden", hidden);
+    });
+  };
+  updateMarks();
+  window.addEventListener("scroll", updateMarks, { passive: true });
+  window.addEventListener("resize", updateMarks);
+</script>

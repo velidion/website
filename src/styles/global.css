@@ -346,7 +346,7 @@ section { padding-block: clamp(56px, 8vw, var(--space-8)); }
 .brand { display: inline-flex; align-items: center; gap: .6em; font: var(--velidion-text-h6); font-size: 12px; color: var(--velidion-color-primary); }
 .brand img { display: block; width: auto; }
 .brand__name { font: 500 22.5px var(--velidion-font-brand); letter-spacing: -0.02em; }
-.footer .brand { font-weight: 500; }
+.footer .brand { font-weight: 500; font-size: 1rem; }
 .footer .brand img { height: 20px; width: auto; }
 .nav-contact {
   display: inline-flex; align-items: center; gap: .35em;

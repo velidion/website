@@ -2,12 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import SectionMarkers from "../components/SectionMarkers.astro";
 
 const CONTACT_EMAIL = "hello@velidion.com";
 ---
 
 <Layout>
     <Nav contactEmail={CONTACT_EMAIL} />
+    <SectionMarkers />
 
     <main>
         <!-- ============================ HERO ============================ -->
