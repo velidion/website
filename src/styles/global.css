@@ -348,6 +348,39 @@ main::after { right: 60px; }
 .problem h2 { margin-inline: auto; }
 .problem .lead { margin-top: var(--space-5); margin-inline: auto; max-width: 54ch; }
 
+/* ---- canvas background effects (see src/scripts/canvas/) ----
+   Generic host: absolutely fills its section, sits above the .noise-bg
+   grain (z:0) but below real content (.wrap is z:1 too — placing the
+   canvas before .wrap in markup means .wrap, coming later, wins the tie
+   and paints on top). Non-interactive and untouched by layout. Per-section
+   rules below clip it to whatever bounds that section actually wants;
+   the base rule makes no assumption about that. */
+.canvas-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+/* Hero's aurora is clipped to the inner vertical guide lines (body::before/
+   ::after) instead of running edge-to-edge — same width formula and mobile
+   breakpoint as .tint::before/.noise-bg::after, which clip to that same
+   pair of lines for the same reason. */
+.hero .canvas-bg {
+  left: 50%;
+  right: auto;
+  width: calc(var(--maxw) - 20px);
+  transform: translateX(-50%);
+}
+@media (max-width: 1276px) {
+  .hero .canvas-bg { width: calc(100vw - 60px); }
+}
+
 /* ---- tint fill (audience / solution / cta section backgrounds) ---- */
 .tint { border-block: 1px solid var(--line); position: relative; }
 .tint::before {
