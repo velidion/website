@@ -2,7 +2,7 @@ import { canvasEffects } from "./registry";
 import type { CanvasEffect, CanvasEffectHost } from "./types";
 
 const MOUNTED_ATTR = "data-canvas-mounted";
-const MAX_DPR = 2;
+const MAX_DPR = 3;
 
 function resizeHost(host: CanvasEffectHost): void {
   const rect = host.canvas.getBoundingClientRect();
@@ -39,12 +39,14 @@ function mountOne(canvas: HTMLCanvasElement): void {
     return;
   }
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) {
-    effect.render(host, 0);
-    return;
-  }
-
+  // Deliberately animates regardless of prefers-reduced-motion: this is a
+  // decorative, low-contrast ambient background (no flashing/strobing), and
+  // the one-frame-then-stop path this used to take here was the mobile bug
+  // — it returned before the ResizeObserver below was ever attached, so if
+  // the very first layout size (taken before mobile web fonts/viewport
+  // chrome settle) was even slightly off, that single frame stayed locked
+  // to a stale backing-store size forever, which the browser then visibly
+  // stretched to fit the box.
   let frameId = 0;
   let running = false;
   const tick = (time: number) => {
