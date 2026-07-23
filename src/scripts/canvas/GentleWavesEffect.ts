@@ -1,22 +1,29 @@
 import type { CanvasEffect, CanvasEffectHost } from "./types";
 import { resolveCssVarRgb } from "./color";
 
+// Scales every stroke's opacity down uniformly — the source's values read
+// a little too strong sitting under body text; this is the one knob to
+// touch to make the whole effect lighter or heavier.
+const OPACITY_SCALE = 0.55;
+
 /** A grid of straight guide-lines plus three families of long flowing lines
  *  (horizontal, diagonal, vertical), all driven by sine motion — ported from
  *  a standalone full-viewport React/canvas piece into this site's
- *  CanvasEffect contract. Two changes from the source: it clears with
- *  clearRect instead of filling an opaque background, so it composites over
- *  whatever the host section already has (here, the .noise-bg grain) rather
- *  than covering it; and its stroke color comes from --line at runtime
- *  instead of a fixed gray, so it always matches the page's own guide lines.
- *  The specific magic numbers below (line counts, opacity/amplitude curves)
+ *  CanvasEffect contract. Changes from the source: it clears with clearRect
+ *  instead of filling an opaque background, so it composites over whatever
+ *  the host section already has (here, the .noise-bg grain) rather than
+ *  covering it; its stroke color is derived from the same design-system
+ *  token the page's own guide lines use (--velidion-color-text, the base
+ *  hue behind --line) instead of a fixed gray, so it always matches them;
+ *  and every opacity is scaled down (OPACITY_SCALE) from the source's
+ *  values. The other magic numbers below (line counts, amplitude curves)
  *  are kept as in the source — they're what produces its particular look,
  *  not arbitrary placeholders. */
 export class GentleWavesEffect implements CanvasEffect {
   private rgb = "80, 80, 80";
 
   init(): void {
-    this.rgb = resolveCssVarRgb("var(--line)");
+    this.rgb = resolveCssVarRgb("--velidion-color-text");
   }
 
   render(host: CanvasEffectHost, time: number): void {
@@ -30,7 +37,7 @@ export class GentleWavesEffect implements CanvasEffect {
     ctx.clearRect(0, 0, width, height);
 
     // Straight grid — the underlying structure.
-    ctx.strokeStyle = `rgba(${rgb}, 0.033)`;
+    ctx.strokeStyle = `rgba(${rgb}, ${0.033 * OPACITY_SCALE})`;
     ctx.lineWidth = 0.3;
     for (let y = 0; y < height; y += 40) {
       const offsetY = 5 * Math.sin(t + y * 0.01);
@@ -55,7 +62,7 @@ export class GentleWavesEffect implements CanvasEffect {
       const frequency = 0.008 + 0.004 * Math.sin(t * 0.1 + i * 0.05);
       const speed = t * (0.5 + 0.3 * Math.sin(i * 0.1));
       const thickness = 0.8 + 0.6 * Math.sin(t + i * 0.2);
-      const opacity = 0.132 + 0.088 * Math.abs(Math.sin(t * 0.3 + i * 0.15));
+      const opacity = (0.132 + 0.088 * Math.abs(Math.sin(t * 0.3 + i * 0.15))) * OPACITY_SCALE;
 
       ctx.beginPath();
       ctx.lineWidth = thickness;
@@ -75,7 +82,7 @@ export class GentleWavesEffect implements CanvasEffect {
       const amplitude = 30 + 20 * Math.cos(t * 0.25 + i * 0.1);
       const phase = t * (0.3 + 0.2 * Math.sin(i * 0.1));
       const thickness = 0.7 + 0.5 * Math.sin(t + i * 0.25);
-      const opacity = 0.11 + 0.077 * Math.abs(Math.sin(t * 0.2 + i * 0.1));
+      const opacity = (0.11 + 0.077 * Math.abs(Math.sin(t * 0.2 + i * 0.1))) * OPACITY_SCALE;
 
       ctx.beginPath();
       ctx.lineWidth = thickness;
@@ -99,7 +106,7 @@ export class GentleWavesEffect implements CanvasEffect {
       const frequency = 0.009 + 0.004 * Math.cos(t * 0.12 + i * 0.07);
       const speed = t * (0.4 + 0.25 * Math.cos(i * 0.15));
       const thickness = 0.6 + 0.4 * Math.sin(t + i * 0.3);
-      const opacity = 0.099 + 0.066 * Math.abs(Math.sin(t * 0.25 + i * 0.18));
+      const opacity = (0.099 + 0.066 * Math.abs(Math.sin(t * 0.25 + i * 0.18))) * OPACITY_SCALE;
 
       ctx.beginPath();
       ctx.lineWidth = thickness;

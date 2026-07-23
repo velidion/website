@@ -24,8 +24,20 @@ function mountOne(canvas: HTMLCanvasElement): void {
 
   const effect: CanvasEffect = createEffect();
   const host: CanvasEffectHost = { canvas, ctx, width: 0, height: 0 };
-  resizeHost(host);
-  effect.init(host);
+
+  // A single canvas' init/render can hit environment quirks entirely outside
+  // our control (e.g. a mobile browser's anti-fingerprinting protections
+  // restricting a canvas API). Isolating each canvas here means one bad
+  // canvas fails silently instead of throwing out of the forEach in
+  // mountCanvasBackgrounds and leaving every *other* canvas on the page
+  // unmounted too.
+  try {
+    resizeHost(host);
+    effect.init(host);
+  } catch (err) {
+    console.error("canvas effect failed to init:", err);
+    return;
+  }
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) {
