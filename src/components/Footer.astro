@@ -6,21 +6,6 @@ type Props = ContactEmailProps;
 const { contactEmail } = Astro.props;
 
 const buildYear = new Date().getFullYear();
-
-const citations = [
-    {
-        href: "https://qualysec.com/fda-510k-timeline/",
-        label: "FDA 510(k) review timelines (Qualysec)",
-    },
-    {
-        href: "https://openregulatory.com/articles/greenlight-guru-price",
-        label: "incumbent eQMS pricing (OpenRegulatory)",
-    },
-    {
-        href: "https://www.nature.com/articles/s41746-025-01800-1",
-        label: "FDA AI/ML device authorization growth (npj Digital Medicine)",
-    },
-];
 ---
 
 <footer class="footer">
@@ -33,28 +18,11 @@ const citations = [
             <Logo size={20} />
             Velidion
         </span>
-        <span>Compliance infrastructure for safety-critical industries.</span>
         <span
             >&copy; <span id="footer-year">{buildYear}</span> Velidion &middot; <a
                 href={`mailto:${contactEmail}`}>{contactEmail}</a
             ></span
         >
-    </div>
-    <div class="wrap">
-        <p class="notes">
-            Figures cited above:
-            {
-                citations.map((citation, i) => (
-                    <>
-                        {" "}
-                        <a href={citation.href} target="_blank" rel="noopener">
-                            {citation.label}
-                        </a>
-                        {i < citations.length - 1 ? ";" : "."}
-                    </>
-                ))
-            }
-        </p>
     </div>
 </footer>
 <script>
