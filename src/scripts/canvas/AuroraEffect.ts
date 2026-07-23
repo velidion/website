@@ -1,4 +1,5 @@
 import type { CanvasEffect, CanvasEffectHost } from "./types";
+import { hexToRgb } from "./color";
 
 /** Tiny deterministic PRNG (mulberry32) — just enough to give each blob
  *  varied-but-stable starting parameters without pulling in a dependency. */
@@ -10,11 +11,6 @@ function mulberry32(seed: number): () => number {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
-}
-
-function hexToRgb(hex: string): string {
-  const n = parseInt(hex.replace("#", ""), 16);
-  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
 }
 
 interface Blob {
