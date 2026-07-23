@@ -4,7 +4,7 @@ import { resolveCssVarRgb } from "./color";
 // Scales every stroke's opacity down uniformly — the source's values read
 // a little too strong sitting under body text; this is the one knob to
 // touch to make the whole effect lighter or heavier.
-const OPACITY_SCALE = 0.45;
+const OPACITY_SCALE = 0.35;
 
 /** A grid of straight guide-lines plus three families of long flowing lines
  *  (horizontal, diagonal, vertical), all driven by sine motion — ported from
