@@ -76,6 +76,15 @@ function mountOne(canvas: HTMLCanvasElement): void {
   new ResizeObserver(() => {
     resizeHost(host);
     effect.resize?.(host);
+    // Changing a canvas' width/height attributes (inside resizeHost) wipes
+    // its bitmap immediately, and the redraw would otherwise wait for the
+    // next scheduled rAF tick. A live window-drag can fire resizes faster
+    // than that tick arrives — e.g. once a CSS breakpoint makes this
+    // canvas's width track 100vw directly instead of a fixed value, nearly
+    // every pixel of drag is a resize — so the gap between "cleared" and
+    // "redrawn" becomes visible flicker. Repainting synchronously here
+    // closes that gap.
+    effect.render(host, performance.now());
   }).observe(canvas);
 }
 
