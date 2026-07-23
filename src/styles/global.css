@@ -384,7 +384,7 @@ main::after { right: 60px; }
 .credibility { position: relative; }
 
 /* ---- footer ---- */
-.footer { border-top: 1px solid var(--line); padding-block: var(--space-7); color: var(--muted); font: var(--velidion-text-body-sm); position: relative; background-color: #FEFCFB; }
+.footer { padding-block: var(--space-7); color: var(--muted); font: var(--velidion-text-body-sm); position: relative; background-color: #FEFCFB; }
 .footer__row { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-8); align-items: center; justify-content: space-between; }
 .footer a { color: var(--ink-soft); }
 
