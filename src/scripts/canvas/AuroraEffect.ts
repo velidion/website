@@ -39,6 +39,12 @@ interface Blob {
 
 const BLOB_COUNT = 4;
 
+// Tuning knobs — adjust these to taste.
+const RADIUS_MIN = 0.22; // fraction of the shorter canvas dimension
+const RADIUS_MAX = 0.34;
+const ALPHA_MIN = 0.16; // per-blob peak opacity (blobs overlap additively)
+const ALPHA_MAX = 0.26;
+
 /** Soft drifting color blobs, aurora-borealis style. Each blob's position
  *  and radius are driven by two summed sine waves per axis at incommensurate
  *  frequencies — cheap "quasi-noise" that never repeats on a noticeable
@@ -66,18 +72,20 @@ export class AuroraEffect implements CanvasEffect {
       phaseX2: rand() * Math.PI * 2,
       phaseY1: rand() * Math.PI * 2,
       phaseY2: rand() * Math.PI * 2,
-      radius: 0.32 + rand() * 0.14,
+      radius: RADIUS_MIN + rand() * (RADIUS_MAX - RADIUS_MIN),
       radiusAmp: 0.05 + rand() * 0.05,
       radiusFreq: 0.03 + rand() * 0.02,
       radiusPhase: rand() * Math.PI * 2,
-      alpha: 0.05 + rand() * 0.03,
+      alpha: ALPHA_MIN + rand() * (ALPHA_MAX - ALPHA_MIN),
     }));
   }
 
   render(host: CanvasEffectHost, time: number): void {
     const { ctx, width, height } = host;
     const t = time / 1000;
-    const extent = Math.max(width, height);
+    // Sized off the shorter dimension so blobs read as distinct drifting
+    // patches instead of one flat wash on a wide-but-short section like hero.
+    const extent = Math.min(width, height);
 
     ctx.clearRect(0, 0, width, height);
     ctx.globalCompositeOperation = "lighter";
