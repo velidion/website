@@ -2,16 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import SectionMarkers from "../components/SectionMarkers.astro";
-import SectionBoundaryMarks from "../components/SectionBoundaryMarks.astro";
+import SectionBoundaryMarksVisibility from "../components/SectionBoundaryMarksVisibility.astro";
+import Section from "../components/Section.astro";
 import CanvasBackground from "../components/CanvasBackground.astro";
-
-const CONTACT_EMAIL = "hello@velidion.com";
 ---
 
 <Layout>
-    <Nav contactEmail={CONTACT_EMAIL} />
-    <SectionMarkers />
+    <Nav />
+    <SectionBoundaryMarksVisibility />
 
     <main>
         <!-- ============================ HERO ============================ -->
@@ -28,48 +26,30 @@ const CONTACT_EMAIL = "hello@velidion.com";
         </section>
 
         <!-- ========================== PROBLEM ========================== -->
-        <section class="problem noise-bg">
-            <SectionBoundaryMarks />
-            <div class="wrap">
-                <h2>Placeholder problem headline</h2>
-                <p class="lead">
-                    Placeholder copy for the problem section — just here to give
-                    this section some real space to look at. We'll swap this out
-                    for the real content later.
-                </p>
-            </div>
-        </section>
+        <Section name="problem" variant="noise-bg">
+            <h2>Placeholder problem headline</h2>
+            <p class="lead">
+                Placeholder copy for the problem section — just here to give
+                this section some real space to look at. We'll swap this out
+                for the real content later.
+            </p>
+        </Section>
 
         <!-- ========================= AUDIENCE ========================== -->
-        <section class="tint audience">
-            <SectionBoundaryMarks />
-            <div class="wrap"></div>
-        </section>
+        <Section name="audience" variant="tint"></Section>
 
         <!-- ========================== BELIEF =========================== -->
-        <section class="belief noise-bg">
-            <SectionBoundaryMarks />
-            <div class="wrap"></div>
-        </section>
+        <Section name="belief" variant="noise-bg"></Section>
 
         <!-- ========================= SOLUTION =========================== -->
-        <section class="tint solution">
-            <SectionBoundaryMarks />
-            <div class="wrap"></div>
-        </section>
+        <Section name="solution" variant="tint"></Section>
 
         <!-- ======================== CREDIBILITY ========================= -->
-        <section class="credibility noise-bg">
-            <SectionBoundaryMarks />
-            <div class="wrap"></div>
-        </section>
+        <Section name="credibility" variant="noise-bg"></Section>
 
         <!-- ============================ CTA ============================ -->
-        <section class="tint cta">
-            <SectionBoundaryMarks />
-            <div class="wrap"></div>
-        </section>
+        <Section name="cta" variant="tint"></Section>
     </main>
 
-    <Footer contactEmail={CONTACT_EMAIL} />
+    <Footer />
 </Layout>

@@ -15,16 +15,27 @@ npm run preview  # preview the production build locally
 
 Requires Node 18+ (built and tested on Node 22).
 
-The contact email (`hello@velidion.com`, forwards to a personal inbox) is set once, at the top of `src/pages/index.astro`, and passed down to `Nav` and `Footer`.
+The brand name and contact email (`hello@velidion.com`, forwards to a personal inbox) live in one place, `src/site.config.ts`, imported directly wherever they're needed (`Nav`, `Footer`, `Layout`, `Logo`) — update that file, not the individual components.
+
+TypeScript path alias `@/*` → `src/*` is available (see `tsconfig.json`) for any new code that ends up nested deep enough that relative imports get unwieldy; existing imports haven't been migrated to it.
 
 ## Structure
 
 ```
 website/
 ├─ src/
-│  ├─ pages/index.astro       ← the landing page (all copy + sections here)
-│  ├─ components/             ← Nav, Footer, Logo, SectionMarkers, SectionBoundaryMarks
-│  │  └─ props.ts             ← shared prop types
+│  ├─ site.config.ts          ← brand name + contact email, single source of truth
+│  ├─ pages/index.astro       ← the landing page (composes the sections below)
+│  ├─ components/
+│  │  ├─ Nav.astro, Footer.astro, Logo.astro
+│  │  ├─ Section.astro                    ← wrapper for a noise-bg/tint section + its boundary marks
+│  │  ├─ SectionBoundaryMarks.astro       ← per-section guide-line diamond markup (used by Section)
+│  │  ├─ SectionBoundaryMarksVisibility.astro  ← global scroll listener that hides those marks near the nav
+│  │  └─ CanvasBackground.astro           ← mounts a canvas background effect (see scripts/canvas/ below)
+│  ├─ scripts/canvas/          ← the canvas background-effect engine backing CanvasBackground.astro:
+│  │  │                          types.ts (CanvasEffect contract), registry.ts (name → effect
+│  │  │                          lookup), mount.ts (sizing/visibility/rAF), color.ts (design-token
+│  │  │                          color resolution), GentleWavesEffect.ts (the current effect)
 │  ├─ layouts/Layout.astro    ← <head>, meta/SEO/OpenGraph, fonts
 │  └─ styles/
 │     ├─ tokens.css           ← brand colors/type, vendored from design-system/tokens/

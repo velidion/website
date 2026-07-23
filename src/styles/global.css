@@ -82,12 +82,11 @@ a:hover { color: var(--velidion-color-primary); }
    cell crisp and square rather than blurred. Clipped horizontally to the
    gap between the two outermost guide lines (main::before/::after, 60px
    from each edge — the same 120px total inset), same centering technique
-   as .tint::before. Footer's own ::before/::after are already used for its
-   fixed nav-diamond markers, so it gets a real .noise-fill span instead of
-   the .noise-bg class (deliberately NOT applied to <footer> itself — if it
-   were, .noise-bg::after would also match footer's own ::after and fight
-   with .footer::after's diamond over the exact same pseudo-element, which
-   silently breaks the diamond's rendering even with !important overrides).
+   as .tint::before. Footer uses a dedicated .noise-fill span instead of the
+   .noise-bg class (deliberately NOT applied to <footer> itself, to keep
+   .noise-bg::after from ever needing to coexist with footer's own
+   ::before/::after — which host the nav's diamond markers, see the
+   diamond-marker comment further down).
    z-index:0 (not -1): Chromium fails to rasterize this filter-based SVG
    background at all when the element has a *negative* z-index — the
    texture silently renders blank. z-index:0 avoids that, and .wrap now
@@ -240,35 +239,21 @@ main::after { right: 60px; }
   color: var(--ink-soft);
 }
 
-/* diamond markers where the two inner vertical guide lines cross the nav's
-   bottom border — static, fixed to the nav's plane, always on top. Opaque
+/* diamond markers where the vertical guide lines cross the nav's bottom
+   border — static, fixed to the nav's plane, always on top. Opaque
    (--line-solid, not --line) so the guide lines don't show through, without
-   changing the guide lines themselves. Hosted on .footer, NOT .nav: .nav is
-   position:fixed with its own z-index, which creates a stacking context and
-   traps any ::before/::after inside it at that z-index no matter what z-index
-   they're given locally — .footer has no position/z-index of its own, so its
-   pseudo-elements stack directly against the (also root-level) guide lines. */
-.footer::before, .footer::after {
-  content: "";
-  position: fixed;
-  top: calc(var(--nav-height) + 0.5px);
-  width: 6px;
-  height: 6px;
-  background: #ffffff;
-  border: 1px solid var(--line-solid);
-  z-index: 22;
-  pointer-events: none;
-}
-.footer::before { left: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
-.footer::after { right: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
-/* same diamond markers, at the outer pair of vertical guide lines (main::before/::after,
-   fixed 60px from the edge) instead of the inner pair. Hosted on a dedicated real span
-   (.nav-diamond-outer, a direct child of <footer>) rather than .footer__row: .footer__row
-   is also .wrap, and .wrap now carries position:relative + z-index:1 (for the noise-grain
-   layering below) — that gives .footer__row its own stacking context, which traps these
-   ::before/::after inside it at effectively z:1 no matter what z-index they're given
-   locally, so they lose to the guide lines (z:21) instead of beating them. A plain span
-   with no z-index of its own doesn't have that problem. */
+   changing the guide lines themselves. One dedicated span per pair
+   (.nav-diamond-inner for the inner guide-line pair, .nav-diamond-outer for
+   the outer pair, fixed 60px from the edge), both direct children of
+   <footer> — not <nav>, whose position:fixed + its own z-index creates a
+   stacking context that traps any descendant's ::before/::after at that
+   z-index no matter what z-index they're given locally; and not
+   .footer__row, which is also .wrap and carries position:relative +
+   z-index:1 (for the noise-grain layering below), same trapping problem.
+   <footer> itself has no position/z-index of its own, so a plain span
+   hosted directly on it stacks against the (also root-level) guide lines
+   without getting trapped either way. */
+.nav-diamond-inner::before, .nav-diamond-inner::after,
 .nav-diamond-outer::before, .nav-diamond-outer::after {
   content: "";
   position: fixed;
@@ -280,6 +265,8 @@ main::after { right: 60px; }
   z-index: 22;
   pointer-events: none;
 }
+.nav-diamond-inner::before { left: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
+.nav-diamond-inner::after { right: calc((100vw - var(--maxw)) / 2 + 10px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 .nav-diamond-outer::before { left: calc(60px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
 .nav-diamond-outer::after { right: calc(60px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 
@@ -324,7 +311,7 @@ main::after { right: 60px; }
 .hmark-out::before { left: calc(60px + 0.5px); transform: translate(-50%, -50%) rotate(45deg); }
 .hmark-out::after { right: calc(60px + 0.5px); transform: translate(50%, -50%) rotate(45deg); }
 /* Placed after the rules above (not inside the earlier @media block near
-   main::before/::after) on purpose: .footer::before/::after and
+   main::before/::after) on purpose: .nav-diamond-inner::before/::after and
    .hmark-in::before/::after are defined below that block, so an override
    placed before them there would lose the cascade to these unconditional
    calc() rules regardless of the media query. Freezing here — after them,
@@ -333,8 +320,8 @@ main::after { right: 60px; }
    ::after freeze to, so they track the now-static line instead of
    continuing to drift inward on their own live formula. */
 @media (max-width: 1276px) {
-  .footer::before, .hmark-in::before { left: 30.5px; }
-  .footer::after, .hmark-in::after { right: 30.5px; }
+  .nav-diamond-inner::before, .hmark-in::before { left: 30.5px; }
+  .nav-diamond-inner::after, .hmark-in::after { right: 30.5px; }
 }
 
 /* ---- hero ---- */

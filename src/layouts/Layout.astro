@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE } from '../site.config';
 
 interface Props {
   title?: string;
@@ -7,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = 'Velidion — compliance infrastructure for safety-critical engineering',
-  description = 'Velidion is building the operating system for engineering compliance in safety-critical industries — starting with the small regulated teams the incumbents have priced out.',
+  title = `${SITE.name} — compliance infrastructure for safety-critical engineering`,
+  description = `${SITE.name} is building the operating system for engineering compliance in safety-critical industries — starting with the small regulated teams the incumbents have priced out.`,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);

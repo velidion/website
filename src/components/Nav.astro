@@ -1,18 +1,15 @@
 ---
 import Logo from './Logo.astro';
-import type { ContactEmailProps } from './props';
-
-type Props = ContactEmailProps;
-const { contactEmail } = Astro.props;
+import { SITE } from '../site.config';
 ---
 
 <header class="nav">
   <div class="wrap nav__row">
-    <a class="brand" href="/" aria-label="Velidion home">
+    <a class="brand" href="/" aria-label={`${SITE.name} home`}>
       <Logo variant="gradient" size={30} alt="" />
-      <span class="brand__name">Velidion</span>
+      <span class="brand__name">{SITE.name}</span>
     </a>
-    <a class="nav-contact" href={`mailto:${contactEmail}`}
+    <a class="nav-contact" href={`mailto:${SITE.contactEmail}`}
       ><svg
         viewBox="0 0 24 24"
         width="1em"

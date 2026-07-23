@@ -1,0 +1,22 @@
+---
+import SectionBoundaryMarks from "./SectionBoundaryMarks.astro";
+
+interface Props {
+  /** Section-specific class, e.g. "problem" — deliberately plain string, not
+   *  a union of today's known names: this is a template meant to grow more
+   *  sections later. */
+  name: string;
+  variant: "noise-bg" | "tint";
+}
+const { name, variant } = Astro.props;
+// Reproduces the existing hand-written convention exactly: tint sections
+// render class="tint {name}", noise-bg sections render class="{name} noise-bg".
+const classList = variant === "tint" ? [variant, name] : [name, variant];
+---
+
+<section class:list={classList}>
+    <SectionBoundaryMarks />
+    <div class="wrap">
+        <slot />
+    </div>
+</section>
