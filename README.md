@@ -51,5 +51,4 @@ Colors, type, and the logo come from the `design-system` repo — the source of 
 
 ## Notes
 
-- The Audience, Belief, Solution, Credibility, and CTA sections on the page currently render with no content — only Hero and Problem have real copy right now.
-- `preview.html`, if present, is a local single-file snapshot for eyeballing — it is git-ignored and not part of the build. The real site is generated from `src/` by `npm run build`.
+- The Audience, Belief, Solution, Credibility, and CTA sections on the page currently render with no content — the Hero and Problem section render with fake content.
